@@ -13,33 +13,33 @@
 #
 # For full documentation, including a list of all inputs, please refer to the README https://github.com/checkmarx-ts/checkmarx-cxflow-github-action
 
-name: Checkmarx SAST Scan
-on:
-  push:
-    branches:
-      - main
-      - master
+# name: Checkmarx SAST Scan
+# on:
+#   push:
+#     branches:
+#       - main
+#       - master
     
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Checkmarx CxFlow Action
-      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.1 #Github Action version
-      with:
-        project: CxSamShober-sls-owasp-benchmark-GH-Action # <-- Insert Checkmarx SAST Project Name
-        team: /CxServer/SP/Company/CxSamShober
-        checkmarx_url: ${{ secrets.CHECKMARX_URL }} # To be stored in GitHub Secrets.
-        checkmarx_username: ${{ secrets.CHECKMARX_USER }} # To be stored in GitHub Secrets.
-        checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }} # To be stored in GitHub Secrets.
-        checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }} # To be stored in GitHub Secrets.
-        break_build: false
-        scanners: sast
-        bug_tracker: Sarif
-        params: --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }}
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: cx.sarif
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+#     - name: Checkmarx CxFlow Action
+#       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.1 #Github Action version
+#       with:
+#         project: CxSamShober-sls-owasp-benchmark-GH-Action # <-- Insert Checkmarx SAST Project Name
+#         team: /CxServer/SP/Company/CxSamShober
+#         checkmarx_url: ${{ secrets.CHECKMARX_URL }} # To be stored in GitHub Secrets.
+#         checkmarx_username: ${{ secrets.CHECKMARX_USER }} # To be stored in GitHub Secrets.
+#         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }} # To be stored in GitHub Secrets.
+#         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }} # To be stored in GitHub Secrets.
+#         break_build: false
+#         scanners: sast
+#         bug_tracker: Sarif
+#         params: --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }}
+#     - name: Upload SARIF file
+#       uses: github/codeql-action/upload-sarif@v1
+#       with:
+#         sarif_file: cx.sarif
